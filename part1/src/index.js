@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import Header from './components/Header/Header'
 
 const Statistics = ({ good, neutral, bad, total }) => {
+
   return (
     <div>
       <span>good {good}</span> <br />
@@ -45,7 +46,10 @@ const App = () => {
         <button onClick={handleBad} >bad</button>
       </div>
       <Header title={'statics'} />
-      <Statistics good={good} neutral={neutral} bad={bad} total={total} />
+      {
+        total === 0 ? 'No feedback given' : <Statistics good={good} neutral={neutral} bad={bad} total={total} />
+      }
+
 
     </div>
   )
