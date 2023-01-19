@@ -1,13 +1,9 @@
-import Part from '../Part/Part'
-const Content = ({parts}) => {
+
+const Content = ({children}) => {
   return (
     <div>
-    {
-      parts.map((part, index) => (
-        <Part key={index} name={part.name} exercises={part.exercises}></Part>
-      ))
-
-    }
+    
+      {children}
       
     </div>
   )

@@ -1,4 +1,4 @@
 const Header = (props) => {
-  return <header>{props.course}</header>
+  return <h1>{props.title}</h1>
 }
 export default Header
