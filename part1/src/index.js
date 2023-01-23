@@ -11,8 +11,6 @@ const randomizer = () => {
 
 const App = (props) => {
   const [votes, setVotes] = useState(Array(props.anecdotes.length).fill(0))
-  const votesCopy = [...votes]
-
   const [selected, setSelected] = useState(0)
 
   const voteQuote = (selected) => {
@@ -20,7 +18,21 @@ const App = (props) => {
     newVotes[selected]++
     setVotes(newVotes)
 
-    console.log(votes)
+  }
+
+  const checkVotes = () => {
+    const newVotes = [...votes]
+    let max = newVotes[0];
+    let maxIndex = 0;
+
+    for (var i = 1; i < newVotes.length; i++) {
+      if (newVotes[i] > max) {
+        maxIndex = i;
+        max = newVotes[i];
+      }
+    }
+
+    return maxIndex
   }
 
   return (
@@ -29,6 +41,9 @@ const App = (props) => {
       <p>has {votes[selected]} votes</p>
       <button onClick={() => voteQuote(selected)}>vote</button>
       <button onClick={() => setSelected(randomizer)}>next anecdote</button>
+      <Header title={'Anecdote with most votes'} />
+      <p>{props.anecdotes[checkVotes()]}</p>
+      <p>has {votes[checkVotes()]} votes</p>
     </div>
   )
 }
