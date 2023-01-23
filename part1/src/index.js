@@ -17,9 +17,12 @@ import Header from './components/Header/Header'
 
 const Statistics = ({ text, value }) => {
   return (
-    <div>
-      <span>{text} {value}</span> <br />
-    </div>
+
+    <tr>
+
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
@@ -56,15 +59,18 @@ const App = () => {
       </div>
       <Header title={'statics'} />
       {
-        total === 0 ? 'No feedback given' : <>
+        total === 0 ? 'No feedback given' : <table>
+          <tbody>
 
-          <Statistics text="good" value={good} />
-          <Statistics text="neutral" value={neutral} />
-          <Statistics text="bad" value={bad} />
-          <Statistics text="total" value={total} />
-          <Statistics text="average" value={(good - bad) / total} />
-          <Statistics text="positive" value={(good * 100) / total} />
-        </>
+
+            <Statistics text="good" value={good} />
+            <Statistics text="neutral" value={neutral} />
+            <Statistics text="bad" value={bad} />
+            <Statistics text="total" value={total} />
+            <Statistics text="average" value={(good - bad) / total} />
+            <Statistics text="positive" value={(good * 100) / total} />
+          </tbody>
+        </table>
       }
 
 
