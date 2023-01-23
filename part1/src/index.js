@@ -7,12 +7,27 @@ const randomizer = () => {
   return Math.floor(Math.random() * 6)
 }
 
+
+
 const App = (props) => {
+  const [votes, setVotes] = useState(Array(props.anecdotes.length).fill(0))
+  const votesCopy = [...votes]
+
   const [selected, setSelected] = useState(0)
+
+  const voteQuote = (selected) => {
+    const newVotes = [...votes]
+    newVotes[selected]++
+    setVotes(newVotes)
+
+    console.log(votes)
+  }
 
   return (
     <div>
       <p>{props.anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={() => voteQuote(selected)}>vote</button>
       <button onClick={() => setSelected(randomizer)}>next anecdote</button>
     </div>
   )
