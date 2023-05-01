@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './Components/Filter/Filter'
 import Form from './Components/Form/Form'
 import Persons from './Components/Persons/Persons'
-import { addPerson, deletePerson, getPersons } from './services/persons'
+import { addPerson, deletePerson, getPersons, updatePerson } from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -28,7 +28,8 @@ const App = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    if (persons.filter(person => person.name === newName).length <= 0) {
+    const personsFilter = persons.filter(person => person.name === newName).length <= 0
+    if (personsFilter) {
 
       const addNewName = {
         name: newName,
@@ -45,7 +46,16 @@ const App = () => {
 
     }
     else {
-      alert(`${newName} is already added to phonebook`)
+      const person = persons.find(x => (x.name === newName))
+      console.log(person)
+      if (window.confirm(`${newName} is already added to phonebook,replace the old number with a new one?`)) {
+        const updateNumber = {
+          name: newName,
+          number: newNumber
+        }
+        updatePerson(person.id, updateNumber)
+        window.location.reload()
+      }
     }
   }
   const handleFilter = (evt) => {

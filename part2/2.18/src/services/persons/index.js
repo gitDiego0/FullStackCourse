@@ -8,6 +8,8 @@ export const getPersons = () => {
     })
 }
 
+
+
 export const addPerson = ({ name, number }) => {
   return axios.post('http://localhost:3001/persons', { name, number })
     .then(response => {
@@ -18,5 +20,10 @@ export const addPerson = ({ name, number }) => {
 
 export const deletePerson = (id) => {
   return axios.delete(`http://localhost:3001/persons/${id}`)
+    .then(response => response.data)
+}
+
+export const updatePerson = (id, newNumber) => {
+  return axios.put(`http://localhost:3001/persons/${id}`, newNumber)
     .then(response => response.data)
 }
